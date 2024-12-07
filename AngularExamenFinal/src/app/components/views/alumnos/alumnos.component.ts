@@ -37,8 +37,7 @@ export class AlumnosComponent implements OnInit {
     this.formAlumno = new FormGroup({
       nombre:new FormControl(null,[Validators.required]),
       apellido:new FormControl(null,[Validators.required]),
-      dni:new FormControl(null,[Validators.required,Validators.pattern(/^\d{8}$/)]),
-      ciclo: new FormControl(null,[Validators.required,Validators.min(1),Validators.max(6)]),
+      img:new FormControl(null,[Validators.required]),
       estado: new FormControl(null, [Validators.required, validEstado()]),
     });
   }
@@ -58,10 +57,9 @@ export class AlumnosComponent implements OnInit {
   let form = this.formAlumno
   this._alumnoService.obtenerAlumnos(id)
   .subscribe((data) =>{
-    form.controls['nombre'].setValue(data.alumnos.nombre)
-    form.controls['apellido'].setValue(data.alumnos.apellido)
-    form.controls['dni'].setValue(data.alumnos.dni)
-    form.controls['ciclo'].setValue(data.alumnos.ciclo)
+    form.controls['descripcion'].setValue(data.alumnos.descripcion)
+    form.controls['img'].setValue(data.alumnos.img)
+    form.controls['direccion'].setValue(data.alumnos.direccion)
     form.controls['estado'].setValue(data.alumnos.estado)
     console.log(data.alumnos)
   });

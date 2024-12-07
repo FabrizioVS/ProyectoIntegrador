@@ -1,13 +1,10 @@
 package com.examenfinal.FabrizioValerSanchez.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,23 +13,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuario")
+@Table(name = "publicacion")
 @EntityListeners(AuditingEntityListener.class)
-public class Usuario {
-
+public class Publicacion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idUsuario")
-	private int idUsuario;
-	private String nombre;
-	private String apellido;
-	@Column(name = "idDistrito")
-	private int idDistrito;
-	private String email;
-	private String password;
+
+	private int id;
+	private String descripcion;
+	private String img;
+	private String direccion;
+	private String estado;
+	private String nombreusu;
 	private String fecha;
-	
-	@ManyToOne
-	@JoinColumn(name = "idDistrito", referencedColumnName = "id", insertable = false, updatable = false)
-	private Distrito distrito;
 }

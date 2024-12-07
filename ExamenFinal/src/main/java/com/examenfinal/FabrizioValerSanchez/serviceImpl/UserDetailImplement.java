@@ -60,7 +60,7 @@ public class UserDetailImplement implements UserDetails{
 		return usuario.getFecha();
 	}
 	
-	public Long getIdusuario() {
+	public int getIdusuario() {
 		return usuario.getIdUsuario();
 	}
 	

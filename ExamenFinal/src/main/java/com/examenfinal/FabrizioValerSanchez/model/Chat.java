@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,18 +16,25 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "alumno")
+@Table(name = "chat")
 @EntityListeners(AuditingEntityListener.class)
-public class Alumno {
+public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(name = "idUsuario")
+	private int idUsuario;
+	@Column(name = "idPublicacion")
+	private int idPublicacion;
+	private String mensaje;
+	private String fechachat;
+	
+	@ManyToOne
+	@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario", insertable = false, updatable = false)
+	private Usuario usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPublicacion", referencedColumnName = "id", insertable = false, updatable = false)
+	private Publicacion publicacion;
 
-	private Long id;
-	private String nombre;
-	private String apellido;
-	private String dni;
-	private int ciclo;
-	private String estado;
-	private String nombreusu;
-	private String fecha;
-}
+} 

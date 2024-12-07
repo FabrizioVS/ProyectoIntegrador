@@ -26,13 +26,12 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apeliido</th>
-                <th scope="col">Dni</th>
-                <th scope="col">Ciclo</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Img</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Estado</th>
                 <th scope="col">NombreUsuario</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Editar</th>
                 <th scope="col">Eliminar</th>
             </tr>
@@ -40,15 +39,15 @@
         <tbody>
             <tr *ngFor="let lista of listaAlumnos; index as i">
                 <th scope="row">{{i+1}}</th>
-                <td>{{lista.nombre}}</td>
-                <td>{{lista.apellido}} und.</td>
-                <td>{{lista.dni}}</td>
-                <td> {{lista.ciclo}}</td>
+                <td>{{lista.descripcion}}</td>
+                <td>{{lista.img}} und.</td>
+                <td>{{lista.direccion}}</td>
+                <td>{{lista.estado === 'A' ? 'Si' : 'No'}}</td>
                 <td> {{lista.nombreusu}}</td>
                 <td> {{lista.fecha}}</td>
                
                 
-                <td>{{lista.estado === 'A' ? 'Si' : 'No'}}</td>
+                
                 <td>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
                         data-bs-target="#modalAlumno" (click)="titulo('Editar', lista.id)">

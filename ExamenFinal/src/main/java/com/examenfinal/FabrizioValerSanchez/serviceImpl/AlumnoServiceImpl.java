@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.examenfinal.FabrizioValerSanchez.model.Alumno;
+import com.examenfinal.FabrizioValerSanchez.model.Publicacion;
 import com.examenfinal.FabrizioValerSanchez.model.Usuario;
 import com.examenfinal.FabrizioValerSanchez.repository.AlumnoRepository;
 import com.examenfinal.FabrizioValerSanchez.repository.UsuarioRepository;
@@ -33,7 +33,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 	@Override
 	public ResponseEntity<Map<String, Object>> listarAlumnos() {
 		Map<String, Object> res = new HashMap<>();
-		List<Alumno> alums = alumnoDao.findAll();
+		List<Publicacion> alums = alumnoDao.findAll();
 		if (!alums.isEmpty()) {
 			res.put("mensaje", "Lista de alumnos");
 			res.put("alumnos", alums);
@@ -49,9 +49,9 @@ public class AlumnoServiceImpl implements AlumnoService {
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> listarAlumnosPorId(Long id) {
+	public ResponseEntity<Map<String, Object>> listarAlumnosPorId(int id) {
 		Map<String, Object> res = new HashMap<>();
-		Optional<Alumno> alums = alumnoDao.findById(id);
+		Optional<Publicacion> alums = alumnoDao.findById(id);
 
 		if (alums.isPresent()) {
 			res.put("alumnos", alums);
@@ -68,7 +68,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> agregarAlumnos(Alumno alumno) {
+	public ResponseEntity<Map<String, Object>> agregarAlumnos(Publicacion alumno) {
 	    Map<String, Object> respuesta = new HashMap<>();
 	    String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
@@ -104,7 +104,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 	
 	}
 	@Override
-	public ResponseEntity<Map<String, Object>> editarAlumnos(Alumno a, Long id) {
+	public ResponseEntity<Map<String, Object>> editarAlumnos(Publicacion a, int id) {
 	    
 	    String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    List<Usuario> idUsu = usuarioDao.findByEmail(email);
@@ -128,14 +128,13 @@ public class AlumnoServiceImpl implements AlumnoService {
 	    a.setFecha(fechaFormateada);
 	    
 	    Map<String, Object> respuesta = new HashMap<>();
-	    Optional<Alumno> aluExist = alumnoDao.findById(id);
+	    Optional<Publicacion> aluExist = alumnoDao.findById(id);
 
 	    if (aluExist.isPresent()) {
-	        Alumno alumno = aluExist.get();
-	        alumno.setNombre(a.getNombre());
-	        alumno.setApellido(a.getApellido());
-	        alumno.setDni(a.getDni());
-	        alumno.setCiclo(a.getCiclo());
+	        Publicacion alumno = aluExist.get();
+	        alumno.setDescripcion(a.getDescripcion());
+	        alumno.setImg(a.getImg());
+	        alumno.setDireccion(a.getDireccion());
 	        alumno.setEstado(a.getEstado());
 	        alumno.setNombreusu(primerUsuario.getNombre());
 	        alumno.setFecha(fechaFormateada);
@@ -155,11 +154,11 @@ public class AlumnoServiceImpl implements AlumnoService {
 
 
 	@Override
-	public ResponseEntity<Map<String, Object>> eliminarAlumnos(Long id) {
+	public ResponseEntity<Map<String, Object>> eliminarAlumnos(int id) {
 		Map<String, Object> res = new HashMap<>();
-		Optional<Alumno> aluExist = alumnoDao.findById(id);
+		Optional<Publicacion> aluExist = alumnoDao.findById(id);
 		if (aluExist.isPresent()) {
-			Alumno producto = aluExist.get();
+			Publicacion producto = aluExist.get();
 			alumnoDao.delete(producto);
 			res.put("mensaje", "Eliminado correctamente");
 			res.put("status", HttpStatus.NO_CONTENT);
@@ -173,5 +172,6 @@ public class AlumnoServiceImpl implements AlumnoService {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
 		}
 	}
+
 
 }
