@@ -101,9 +101,9 @@ registrarAlumno(formulario: any): void {
       this.cerrarModal();
       this.obtnerAlumnos();
       this.resetForm();
-      console.log('Alumno registrado', response);
+      console.log('Publicacion registrado', response);
     }, error => {
-      console.error('Error al registrar Alumno', error);
+      console.error('Error al registrar Publicacion', error);
     });
   } else {
     console.log('Formulario no válido:', this.formAlumno);
@@ -117,9 +117,9 @@ editarAlumno(id: number, formulario: any): void {
       this.cerrarModal()
       this.obtnerAlumnos()
       this.resetForm()
-      console.log('Alumno modificado', response);
+      console.log('Publicacion modificado', response);
     }, error => {
-      console.error('Error al modificar alumno', error);
+      console.error('Error al modificar Publicacion', error);
       this.validarFormulario();
     }
   );
@@ -127,7 +127,7 @@ editarAlumno(id: number, formulario: any): void {
 }
 
 titulo(titulo: any, id: number) {
-  this.title = `${titulo} alumno`
+  this.title = `${titulo} Publicacion`
   titulo == "Crear" ? this.nameBoton = "Guardar" : this.nameBoton = "Modificar"
   if (id != null) {
     this.id = id
@@ -163,7 +163,7 @@ cerrarBoton() {
 alertRegistro() {
   if (this.formAlumno.valid) {
     Swal.fire({
-      title: '¿Estás seguro de registrar el alumno?',
+      title: '¿Estás seguro de registrar el publicacion?',
       icon: 'success',
       showCancelButton: true,
       confirmButtonText: 'Sí, confirmar',
@@ -183,7 +183,7 @@ alertRegistro() {
 alertModificar() {
   if (this.formAlumno.valid) {
     Swal.fire({
-      title: '¿Estás seguro de modificar el alumno?',
+      title: '¿Estás seguro de modificar el publicacion?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Sí, modificar',
@@ -203,7 +203,7 @@ alertaExitosa(titulo: any){
   Swal.fire({
     position: "top-end",
     icon: "success",
-    title: "Alumno "+titulo,
+    title: "Publicacion "+titulo,
     showConfirmButton: false,
     timer: 1500
   });
