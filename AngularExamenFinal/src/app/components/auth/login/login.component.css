@@ -1,0 +1,17 @@
+.login{
+    width: 70%;
+    margin: 20%;
+    border: 3px solid gray;
+    border-radius: 8px;
+    padding: 5%;
+  }
+  
+  .login h2{
+    text-align: center;
+    padding: 20px;
+  }
+  .container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }

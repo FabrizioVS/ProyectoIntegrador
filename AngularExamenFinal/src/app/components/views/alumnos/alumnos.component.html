@@ -1,0 +1,146 @@
+<div>
+<br>
+<div class="row">
+    <div class="col-12 btn-agregar">
+        <button type="submit" class="btn btn-danger" (click)="logout()">
+            Cerrar sesion
+        </button>
+    </div>
+</div>
+<div class="row p-5">
+    <div class="col-12" >
+        <div class="row section-banner">
+            <div class="col-6">
+            <h2>Listado de Alumnos</h2>
+            </div>
+        <div class="col-6 btn-agregar">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAlumno"
+            (click)="titulo('Crear',null)">
+                Nuevo Alumno
+            </button>
+        </div>
+    </div>
+</div>
+<div class="col-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apeliido</th>
+                <th scope="col">Dni</th>
+                <th scope="col">Ciclo</th>
+                <th scope="col">NombreUsuario</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lista of listaAlumnos; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{lista.nombre}}</td>
+                <td>{{lista.apellido}} und.</td>
+                <td>{{lista.dni}}</td>
+                <td> {{lista.ciclo}}</td>
+                <td> {{lista.nombreusu}}</td>
+                <td> {{lista.fecha}}</td>
+               
+                
+                <td>{{lista.estado === 'A' ? 'Si' : 'No'}}</td>
+                <td>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#modalAlumno" (click)="titulo('Editar', lista.id)">
+                        Editar
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="eliminarAlumnos(lista.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<!-- Modal -->
+<!-- Modal -->
+<form [formGroup]="formAlumno">
+    <div class="modal fade" id="modalAlumno">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{title}}</h5>
+            <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" required>
+                  <label for="Nombre">Nombre</label>
+                  <small *ngIf="formAlumno.controls['nombre'].hasError('required') && formAlumno.controls['nombre'].touched" class="text-danger">
+                    Campo obligatorio
+                  </small>
+                </div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido">
+                  <label for="Apellido">Apellido</label>
+                  <small *ngIf="formAlumno.controls['apellido'].hasError('required') && formAlumno.controls['apellido'].touched" class="text-danger">
+                    Campo obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="col-6">
+                
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" placeholder="DNI"
+                        formControlName="dni" maxlength="8" required>
+                      <label for="DNI">DNI</label>
+                      <small *ngIf="formAlumno.controls['dni'].hasError('required') && formAlumno.controls['dni'].touched" class="text-danger">
+                        Campo obligatorio.
+                      </small>
+                      <small *ngIf="formAlumno.controls['dni'].hasError('pattern') && formAlumno.controls['dni'].touched" class="text-danger">
+                        Debe de ser exactamente 8 dígitos numéricos.
+                      </small>
+                    </div>
+                  
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" placeholder="Ciclo" formControlName="ciclo">
+                  <label for="Ciclo">Ciclo</label>
+                  <small *ngIf="formAlumno.controls['ciclo'].hasError('required') && formAlumno.controls['ciclo'].touched" class="text-danger">
+                    Campo obligatorio
+                  </small>
+                  <small *ngIf="formAlumno.controls['ciclo'].hasError('min') && formAlumno.controls['ciclo'].touched" class="text-danger">
+                    Tiene que ser mayor a 0
+                  </small>
+                  <small *ngIf="formAlumno.controls['ciclo'].hasError('max') && formAlumno.controls['ciclo'].touched" class="text-danger">
+                    Tiene que ser maximo 6
+                  </small>
+                </div>
+
+                <div class="form-floating">
+                    <input type="estado" class="form-control" placeholder="Estado" formControlName="estado">
+                  <label for="floatingSelect">Estado</label>
+                  <small *ngIf="formAlumno.controls['estado'].hasError('required') && formAlumno.controls['estado'].touched" class="text-danger">
+                    Campo obligatorio
+                  </small>
+                  <small *ngIf="formAlumno.controls['estado'].hasError('validEstado') && formAlumno.controls['estado'].touched" class="text-danger">
+                    Debe ser A o I
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+            <button type="submit" class="btn btn-primary" (click)="crearEditarAlumno(nameBoton)">{{nameBoton}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+
+</div>
