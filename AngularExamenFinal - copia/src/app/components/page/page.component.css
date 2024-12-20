@@ -1,0 +1,117 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+  }
+  
+  /* Contenedor del formulario */
+  .container {
+    max-width: 700px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título principal */
+  h3 {
+    color: black;
+    margin-bottom: 22px;
+  }
+  
+  /* Espaciado entre los formularios */
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Estilo del botón */
+  .btn-primary {
+    background-color: black;
+    border-color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .btn-primary:hover {
+    background-color: black;
+    border-color: black;
+  }
+  
+
+
+  /* Modal */
+  .modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    background-color: black;
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .modal-header .btn-close {
+    background-color: #fff;
+  }
+  
+  .modal-body {
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+  
+  /* Listas dentro del modal */
+  ul li {
+    margin-bottom: 15px;
+  }
+  
+  ul li a {
+    color: black;
+  }
+  
+  ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilo del icono en los campos */
+  i {
+    margin-right: 8px;
+    color: black;
+  }
+  
+  .card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Para que las imágenes recortadas no sobresalgan */
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 200px; /* Altura fija para mantener uniformidad */
+    object-fit: cover; /* Recorta la imagen para ajustarla al contenedor */
+    object-position: center; /* Centra la imagen en el recorte */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .card-body {
+    padding: 15px;
+    text-align: center; /* Opcional: centra el texto */
+  }
+  
+  h5.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  
+  

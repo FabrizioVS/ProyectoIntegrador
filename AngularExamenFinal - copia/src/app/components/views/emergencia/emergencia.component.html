@@ -1,0 +1,145 @@
+<div>
+  <title>Emergencia</title>
+    <!-- Barra de Navegación -->
+    <app-header></app-header>
+    
+    <!-- Barra superior -->
+    <div class="container">
+      <div class="row py-2">
+        <!-- Botón para cerrar sesión -->
+        <div class="col-6 text-end">
+          <!-- Aquí el botón de cerrar sesión ha sido movido a la barra de navegación -->
+        </div>
+      </div>
+      <h1 class="display-4 text-dark font-weight-bold">REPORTA TU EMERGENCIA</h1>
+      <p class="lead text-muted">Mantente informado sobre las emergencias y aporta soluciones a tu comunidad.</p>
+    
+      <!-- Emergencia -->
+      <div class="row p-4">
+        <div class="col-12">
+          <!-- Encabezado de Emergencia -->
+          <div class="row section-banner">
+            <div class="col-6">
+              <h2>Emergencia</h2>
+            </div>
+            <div class="col-6 text-end">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEmergencia" (click)="titulo('Crear', null)">
+                Emergencia
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Números de Emergencia -->
+      <div class="row p-4">
+        <div class="col-12">
+          <div class="section-banner">
+            <h2>Números de Emergencia en Perú</h2>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <i class="fas fa-shield-alt"></i> 
+                <strong>  Policía Nacional del Perú (PNP)</strong>: 
+                <a href="tel:+51105">105</a>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-fire"></i> 
+                <strong>  Bomberos (Cuerpo General de Bomberos Voluntarios del Perú)</strong>: 
+                <a href="tel:+51116">116</a>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-ambulance"></i> 
+                <strong>  Emergencias Médicas (SAMU)</strong>: 
+                <a href="tel:+51106">106</a>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-tasks"></i> 
+                <strong>  Defensa Civil del Perú</strong>: 
+                <a href="tel:+51114">114</a>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-child"></i> 
+                <strong>  Centro de Atención al Niño</strong>: 
+                <a href="tel:+51080000280">0800-00280</a>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-hospital-symbol"></i> 
+                <strong>Emergencias del Ministerio de Salud</strong>: 
+                <a href="tel:+51080010828">0800-10828</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal para crear/editar alumno -->
+    <form [formGroup]="FormEmergencia">
+      <div class="modal fade" id="modalEmergencia">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{ title }}</h5>
+              <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <!-- Descripcion -->
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="descripcion" formControlName="descripcion" required>
+                      <option value="" selected disabled>Selecciona una emergencia</option>
+                      <option value="accidente">Accidente de tránsito</option>
+                      <option value="incendio">Incendio</option>
+                      <option value="desastre">Desastre natural (terremoto, tsunami)</option>
+                      <option value="enfermedad">Emergencia médica (enfermedades graves)</option>
+                      <option value="robo">Robo o asalto</option>
+                    </select>
+                    <label for="descripcion">Descripción de la emergencia</label>
+                    <small *ngIf="FormEmergencia.controls['descripcion'].hasError('required') && FormEmergencia.controls['descripcion'].touched" class="text-danger">
+                      Campo obligatorio
+                    </small>
+                  </div>
+                </div>
+                
+    
+                <!-- Direccion -->
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion" required>
+                    <label for="direccion">Direccion</label>
+                    <small *ngIf="FormEmergencia.controls['direccion'].hasError('required') && FormEmergencia.controls['direccion'].touched" class="text-danger">
+                      Campo obligatorio.
+                    </small>
+                  </div>
+                <!--<button type="submit" class="btn btn-primary" (click)="obtenerUbicacion()">obtenerUbicacion</button>-->
+                  
+                </div>
+    
+                <!-- Distrito -->
+                <div class="col-6">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="idDistrito" formControlName="idDistrito" required>
+                      <option value="" selected disabled>Selecciona un distrito</option>
+                      <option *ngFor="let lista of listarDistritos;" [value]="lista.id">{{ lista.descripcion }}</option>
+                    </select>
+                    <label for="idDistrito">Distrito</label>
+                    <small *ngIf="FormEmergencia.controls['idDistrito'].hasError('required') && FormEmergencia.controls['idDistrito'].touched" class="text-danger">
+                      Selecciona un distrito.
+                    </small>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+              <button type="submit" class="btn btn-primary" (click)="crearEditarAlumno(nameBoton)">{{ nameBoton }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  

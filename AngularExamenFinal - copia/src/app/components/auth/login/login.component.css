@@ -1,0 +1,217 @@
+.login{
+  width: 70%;
+  margin: 20%;
+  border: 3px solid gray;
+  border-radius: 8px;
+  padding: 5%;
+}
+
+.login h2{
+  text-align: center;
+  padding: 20px;
+}
+.container{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+/* General */
+body {
+font-family: 'Poppins', sans-serif;
+background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+color: #444;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+/* Contenedor del Login */
+.login-container {
+width: 100%;
+max-width: 400px;
+padding: 20px;
+box-sizing: border-box;
+}
+
+.login-card {
+background: #fff;
+padding: 40px;
+border-radius: 12px;
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+animation: slideIn 0.5s ease;
+}
+
+.login-card h2 {
+text-align: center;
+margin-bottom: 30px;
+color: #333;
+font-weight: 600;
+}
+
+/* Efecto de Entrada */
+@keyframes slideIn {
+from {
+  transform: translateY(-50px);
+  opacity: 0;
+}
+to {
+  transform: translateY(0);
+  opacity: 1;
+}
+}
+
+/* Estilo del formulario */
+.form-group {
+margin-bottom: 20px;
+}
+
+label {
+font-size: 14px;
+font-weight: 600;
+color: #666;
+margin-bottom: 8px;
+display: block;
+}
+
+.input-wrapper {
+position: relative;
+}
+
+input.form-control {
+width: 100%;
+padding: 10px 10px 10px 35px;
+font-size: 14px;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-sizing: border-box;
+transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input.form-control:focus {
+border-color: #6a11cb;
+box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+outline: none;
+}
+
+.icon {
+position: absolute;
+top: 50%;
+left: 10px;
+transform: translateY(-50%);
+font-size: 16px;
+color: #aaa;
+}
+
+/* Estilo de botones */
+.btn {
+width: 100%;
+padding: 12px;
+font-size: 16px;
+font-weight: 600;
+color: #fff;
+background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+background: linear-gradient(135deg, #4e0bb8 0%, #1d5ee8 100%);
+transform: scale(1.03);
+}
+
+/* Enlaces */
+.register-link {
+display: block;
+text-align: center;
+margin-top: 10px;
+font-size: 14px;
+color: #6a11cb;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.register-link:hover {
+color: #4e0bb8;
+}
+
+
+
+
+/* Estilos del Modal */
+.modal-content {
+border-radius: 12px;
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+color: #fff;
+border-bottom: none;
+border-radius: 12px 12px 0 0;
+}
+
+.modal-title {
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.btn-close {
+background: #fff;
+opacity: 0.8;
+}
+
+.btn-close:hover {
+opacity: 1;
+}
+
+/* Inputs y Select */
+.form-control,
+.form-select {
+border: 1px solid #ddd;
+border-radius: 8px;
+transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+border-color: #6a11cb;
+box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+}
+
+/* Footer */
+.modal-footer {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+padding: 15px 20px;
+border-top: none;
+background-color: #f9f9f9;
+border-radius: 0 0 12px 12px;
+}
+
+.btn-secondary {
+background: #ddd;
+border: none;
+color: #444;
+transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+background: #bbb;
+color: #222;
+}
+
+/* Botón primario */
+.btn-primary {
+background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+border: none;
+}
+
+.btn-primary:hover {
+background: linear-gradient(135deg, #4e0bb8 0%, #1d5ee8 100%);
+}

@@ -1,0 +1,88 @@
+<div>
+    <title>Mapa</title>
+    <!-- Barra de Navegación -->
+    <app-header></app-header>
+    
+  <!-- Contenido del formulario -->
+   
+    <div class="container mt-5">
+      <h3 class="text-center mb-4">Seleccione Distrito y Tipo</h3>
+      
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <!-- Combo Box de Distritos -->
+          <div class="mb-4">
+            <label for="distrito" class="form-label">
+              <i class="bi bi-geo-alt"></i> Distrito:
+            </label>
+            <select
+              id="distrito"
+              [(ngModel)]="distritoSeleccionado"
+              class="form-select"
+              (change)="onFiltroCambiado()"
+            >
+              <option *ngFor="let distrito of distritos" [value]="distrito.id">
+                {{ distrito.descripcion }}
+              </option>
+            </select>
+          </div>
+          
+          <!-- Combo Box de Tipo -->
+          <div class="mb-4">
+            <label for="tipo" class="form-label">
+              <i class="bi bi-list"></i> Tipo:
+            </label>
+            <select
+              id="tipo"
+              [(ngModel)]="tipoSeleccionado"
+              class="form-select"
+              (change)="onFiltroCambiado()"
+            >
+              <option value="bomberos">Estaciones de Bomberos</option>
+              <option value="comisarias">Comisarías</option>
+              <option value="hospitales">Hospitales</option>
+            </select>
+          </div>
+          
+          <!-- Botón para abrir el modal -->
+          <div class="text-center">
+            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#ubicacionesModal">
+              <i class="bi bi-search"></i> Ver Detalles
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal para mostrar datos -->
+      <div class="modal fade" id="ubicacionesModal" tabindex="-1" aria-labelledby="ubicacionesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ubicacionesModalLabel">
+                <span class="text-capitalize">{{ tipoSeleccionado }}</span> en {{ nombreDistritoSeleccionado }}
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Lista de ubicaciones -->
+              <div *ngIf="ubicaciones.length > 0" class="row">
+                <div *ngFor="let item of ubicaciones" class="col-md-4 mb-4">
+                  <div class="card">
+                    <a [href]="item.urlDireccion" target="_blank">
+                      <img [src]="item.imagenUrl" class="card-img-top" [alt]="item.nombre" />
+                    </a>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ item.nombre }}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Mensaje si no hay datos -->
+              <p *ngIf="ubicaciones.length === 0" class="text-center">No hay datos disponibles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

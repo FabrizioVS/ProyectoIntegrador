@@ -1,0 +1,210 @@
+<div>
+  <title>Publicaciones</title>
+  <!-- Barra de Navegación -->
+  <app-header></app-header>
+
+  <!-- Barra superior -->
+  <div class="container">
+    <div class="row py-2">
+      <!-- Botón para cerrar sesión -->
+      <div class="col-6 text-end">
+        <!-- Aquí el botón de cerrar sesión ha sido movido a la barra de navegación -->
+      </div>
+    </div>
+
+    <!-- Publicaciones -->
+         <!-- Encabezado de Publicaciones -->
+  <div class="container py-5">
+    <div class="text-center">
+      <h1 class="display-4 text-dark font-weight-bold"><strong>PUBLICACIONES</strong> REPORTADAS POR LA COMUNIDAD</h1>
+      <p class="lead text-muted">Mantente informado sobre las publicaciones y aporta soluciones a tu comunidad.</p>
+    </div>
+  </div>
+    <div class="row p-4">
+      
+      <div class="col-12">
+        <!-- Encabezado de Publicaciones -->
+        <div class="row section-banner">
+          <div class="col-6">
+            <h2>Publicaciones</h2>
+          </div>
+          <div class="col-6 text-end">
+            <div style="margin-bottom: 10px;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAlumno" (click)="titulo('Crear', null)">
+              Nueva Publicación
+            </button>
+          </div>
+            <div style="margin-bottom: 10px;">
+            <select class="form-select" id="idDistritoSelected" (change)="obtenerIdDistritoDeComboBox($event)" required>
+              <option value="0" selected>Todos los Distritos</option>
+              <option *ngFor="let lista of listarDistritos;" [value]="lista.id">{{lista.descripcion}}</option>
+            </select>
+          </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- Posts estilo Twitter -->
+      <div class="col-12">
+        <div class="posts-container">
+          <div *ngFor="let lista of listaAlumnos; index as i" class="post mb-4">
+            <!-- Cabecera del post -->
+            <div class="post-header d-flex align-items-center">
+
+              <img [src]="lista.urlImg" alt="{{lista.nombreUsuario}}" style="width: 25px; height: 25px; object-fit: cover; border-radius: 50%;">
+              <div class="post-info ms-3">
+                <strong>{{ lista.nombreUsuario }}</strong>
+                <div class="text-muted">{{ lista.fecha }}</div>
+                <div>
+                  <p>{{ lista.distrito.descripcion }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cuerpo del post -->
+            <div class="post-body mt-3">
+              <p>{{ lista.descripcion }}</p>
+            </div>
+            <div class="post-body mt-3">
+              <p>{{ lista.direccion }}</p>
+            </div>
+
+            
+
+            <!-- Acciones del post -->
+            <div class="post-actions d-flex justify-content-between mt-2">
+              <button type="button" class="btn btn-light"  (click)="abrirChat(lista.id)">
+                <i class="fa fa-comment"></i> Comentar
+              </button>
+              <div 
+              [ngClass]="{'visible': lista.idUsuarioP === idActual, 'novisible': lista.idUsuarioP !== idActual}"
+              class="visible">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalAlumno" (click)="titulo('Editar', lista.id)">
+                  <i class="fa fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-light text-danger" (click)="eliminarAlumnos(lista.id)">
+                  <i class="fa fa-trash"></i> Eliminar
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para chat -->
+<div class="modal fade" id="modalChat" tabindex="-1" aria-labelledby="modalChatLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalChatLabel">Chat de la Publicación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="listChats.length > 0; else noMensajes">
+          <div *ngFor="let chat of listChats" class="mensaje">      
+            <script>
+              // Antes de renderizar la página o en la lógica del framework
+              if (!chat.usuario.nombre || chat.usuario.nombre.trim() === "") {
+                chat.usuario.nombre = chat.publicaciones.nombreUsuario;
+              }
+            </script>
+            
+            <div 
+            [ngClass]="{'default': chat.usuario?.idUsuario === idActual, 'blue': chat.usuario?.idUsuario !== idActual}"
+            class="default">
+              <p>
+                <img [src]="chat.usuario?.urlImg" alt="{{chat.usuario?.nombre}}" style="width: 25px; height: 25px; object-fit: cover; border-radius: 50%;">
+                <strong>{{ chat.usuario?.nombre }}:</strong> {{ chat.mensaje }}
+              </p>
+            </div>
+            <p class="fecha text-muted">{{ chat.fechachat }}</p>
+          </div>
+        </div>
+        <ng-template #noMensajes>
+          <p>No hay mensajes disponibles.</p>
+        </ng-template>
+        <form [formGroup]="formChat" (ngSubmit)="enviarMensaje()">
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Escribe tu mensaje:</label>
+            <input
+              type="text"
+              id="mensaje"
+              class="form-control"
+              formControlName="mensaje"
+              placeholder="Escribe tu mensaje..."
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal para crear/editar alumno -->
+  <form [formGroup]="formAlumno">
+    <div class="modal fade" id="modalAlumno">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ title }}</h5>
+            <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Descripcion -->
+              <div class="col-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" placeholder="Descripcion" formControlName="descripcion" required>
+                  <label for="descripcion">Descripcion</label>
+                  <small *ngIf="formAlumno.controls['descripcion'].hasError('required') && formAlumno.controls['descripcion'].touched" class="text-danger">
+                    Campo obligatorio
+                  </small>
+                </div>
+              </div>
+  
+              <!-- Direccion -->
+              <div class="col-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion"  required>
+                  <label for="direccion">Direccion</label>
+                  <small *ngIf="formAlumno.controls['direccion'].hasError('required') && formAlumno.controls['direccion'].touched" class="text-danger">
+                    Campo obligatorio.
+                  </small>
+                </div>
+              </div>
+  
+              <!-- Distrito -->
+              <div class="col-6">
+                
+                <div class="form-floating mb-4">
+                  <select class="form-select" id="idDistrito" formControlName="idDistrito" required>
+                    <option value="" disabled selected>Seleccione un distrito</option>
+                    <option *ngFor="let lista of listarDistritos;" [value]="lista.id">{{lista.descripcion}}</option>
+                  </select>
+                  <label for="idDistrito">Distrito</label>
+                  <small
+                    *ngIf="formAlumno.controls['idDistrito'].hasError('required') && formAlumno.controls['idDistrito'].touched"
+                    class="text-danger"
+                  >
+                    Campo obligatorio
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+            <button type="submit" class="btn btn-primary" (click)="crearEditarAlumno(nameBoton)">{{ nameBoton }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+</div>
+

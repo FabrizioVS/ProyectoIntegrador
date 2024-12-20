@@ -1,0 +1,12 @@
+.nav-link {
+    color: gray;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+  }
+  
+  .nav-link.active {
+    color: white;
+    background-color: #007bff; /* Azul */
+    border-radius: 5px;
+  }
+  

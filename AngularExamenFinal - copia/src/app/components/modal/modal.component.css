@@ -1,0 +1,32 @@
+#ubicacionesModal .modal-content {
+    background-color: #f0f8ff; /* Cambia a un color de fondo azul claro */
+    border-radius: 10px;
+  }
+  
+  #ubicacionesModal .modal-header {
+    background-color: #007bff; /* Azul Bootstrap */
+    color: white;
+  }
+  
+  #ubicacionesModal .modal-footer {
+    background-color: #f8f9fa; /* Gris claro */
+  }
+  
+  #ubicacionesModal .list-group-item {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding: 1.2rem;
+  }
+  
+  #ubicacionesModal .list-group-item strong {
+    color: #333;
+  }
+  
+  #ubicacionesModal .list-group-item a {
+    color: #0056b3;
+  }
+  
+  #ubicacionesModal .text-center {
+    font-style: italic;
+  }
+  
